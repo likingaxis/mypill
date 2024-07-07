@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     premiButton.addEventListener('click', () => {
         calendarioSection.style.display = 'none';
         premiSection.style.display = 'block';
-        sbloccaPremi();
+        sbloccaPremi(); // Chiamata a sbloccaPremi quando si apre la sezione premi
     });
 
     tornaButton.addEventListener('click', () => {
@@ -107,55 +107,93 @@ document.addEventListener('DOMContentLoaded', () => {
         calendarioSection.style.display = 'block';
     });
 
-    // Funzione per sbloccare le immagini (premi.js)
     function sbloccaPremi() {
-      const premiContainer = document.querySelector('.premi-container');
-      const puntiCounter = document.getElementById('punti-counter');
-  
-      // Definisci i premi (puoi personalizzarli)
-      const premi = [
-        { nome: "Premio 1", immagine: "premio.jpg", puntiRichiesti: 10 },
-        { nome: "Premio 2", immagine: "immagine2.jpg", puntiRichiesti: 20 },
-        { nome: "Premio 3", immagine: "immagine3.jpg", puntiRichiesti: 30 },
-        // ... aggiungi altri premi qui
-      ];
-  
-      const giorniPresi = takenDays.filter(Boolean).length;
-      puntiCounter.textContent = giorniPresi;
-  
-      premiContainer.innerHTML = ''; // Pulisci il contenitore dei premi
-  
-      premi.forEach((premio) => {
-        const premioDiv = document.createElement('div');
-        premioDiv.classList.add('premio');
-  
-        const img = document.createElement('img');
-        img.src = premio.immagine;
-        img.alt = premio.nome;
-        premioDiv.appendChild(img);
-  
-        const lockIcon = document.createElement('div');
-        lockIcon.classList.add('lock-icon');
-        lockIcon.innerHTML = '&#128274;'; // Carattere Unicode per l'icona del lucchetto
-        premioDiv.appendChild(lockIcon);
-  
-        const puntiText = document.createElement('div');
-        puntiText.classList.add('punti-text');
-        puntiText.textContent = `${premio.puntiRichiesti} punti`;
-        premioDiv.appendChild(puntiText);
-  
-        if (giorniPresi >= premio.puntiRichiesti) {
-          premioDiv.classList.add('unlocked');
-          premioDiv.removeChild(lockIcon);
-        }
-  
-        premiContainer.appendChild(premioDiv);
-      });
-    }
-
-    // Gestisci il clic sul pulsante "Presa" (corretto)
-    presaButton.addEventListener('click', () => {
-      const centerSlideIndex = swiper.activeIndex;
-      toggleDay(centerSlideIndex + 1); // Attiva/disattiva il giorno centrale
-    });
+        const premiContainer = document.querySelector('.premi-container');
+        const puntiCounter = document.getElementById('punti-counter');
+      
+        const premi = [
+          { nome: "Premio 1", immagine: "premio1.jpg", puntiRichiesti: 10, paginaHtml: "premio1.html" },
+          { nome: "Premio 2", immagine: "premio2.jpg", puntiRichiesti: 20, paginaHtml: "premio2.html" },
+          { nome: "Premio 3", immagine: "premio3.jpg", puntiRichiesti: 30, paginaHtml: "30.html" },
+          // ... aggiungi altri premi qui
+        ];
+      
+        let premiRiscattati = JSON.parse(localStorage.getItem('premiRiscattati')) || {};
+      
+        const giorniPresi = takenDays.filter(Boolean).length;
+        puntiCounter.textContent = giorniPresi;
+      
+        premiContainer.innerHTML = '';
+      
+        premi.forEach((premio) => {
+          const premioDiv = document.createElement('div');
+          premioDiv.classList.add('premio');
+      
+          const imgContainer = document.createElement('div');
+          imgContainer.classList.add('img-container');
+          if (premiRiscattati[premio.nome]) {
+            imgContainer.classList.add('riscattato');
+          } else if (giorniPresi >= premio.puntiRichiesti) {
+            imgContainer.classList.add('riscattabile');
+          } else {
+            imgContainer.classList.add('locked');
+          }
+      
+          const img = document.createElement('img');
+          img.src = premio.immagine;
+          img.alt = premio.nome;
+          imgContainer.appendChild(img);
+      
+          const lockIcon = document.createElement('div');
+          lockIcon.classList.add('lock-icon');
+          lockIcon.innerHTML = '&#128274;'; // Emoji lucchetto
+          if (!premiRiscattati[premio.nome]) {
+            imgContainer.appendChild(lockIcon);
+          }
+      
+          const infoContainer = document.createElement('div');
+          infoContainer.classList.add('info-container');
+      
+          const puntiText = document.createElement('div');
+          puntiText.classList.add('punti-text');
+          puntiText.textContent = `${premio.puntiRichiesti} punti`;
+          infoContainer.appendChild(puntiText);
+      
+          // Creazione del pulsante "Riscatta" o "Apri"
+          const button = document.createElement('button');
+          button.classList.add('riscatta-button');
+          if (premiRiscattati[premio.nome]) {
+            button.textContent = 'Apri';
+            button.addEventListener('click', () => {
+              window.location.href = premio.paginaHtml;
+            });
+          } else {
+            button.textContent = 'Riscatta';
+            button.disabled = giorniPresi < premio.puntiRichiesti;
+            button.addEventListener('click', () => {
+              if (giorniPresi >= premio.puntiRichiesti) {
+                takenDays = takenDays.map((day) => day && Math.random() < 0.8);
+                localStorage.setItem('takenDays', JSON.stringify(takenDays));
+                premiRiscattati[premio.nome] = true;
+                localStorage.setItem('premiRiscattati', JSON.stringify(premiRiscattati));
+                sbloccaPremi(); // Aggiorna i premi dopo il riscatto
+              }
+            });
+          }
+          infoContainer.appendChild(button);
+      
+          premioDiv.appendChild(imgContainer);
+          premioDiv.appendChild(infoContainer);
+          premiContainer.appendChild(premioDiv);
+        });
+      }
+      
+      
+ // Gestisci il clic sul pulsante "Presa" (corretto)
+ presaButton.addEventListener('click', () => {
+    const centerSlideIndex = swiper.activeIndex;
+    toggleDay(centerSlideIndex + 1); // Attiva/disattiva il giorno centrale
+  });
+// Chiama sbloccaPremi inizialmente per caricare i premi al caricamento della pagina
+sbloccaPremi(); 
 });
