@@ -1,40 +1,36 @@
+/* Media query per schermi piccoli (max-width: 768px) */
 @media (max-width: 768px) {
-  /* Regole CSS per ingrandire gli elementi su schermi piccoli */
-  body {
-    font-size: 18px; /* Aumenta la dimensione del font base */
+  /* ... Regole CSS per schermi piccoli ... */
+
+  /* Stili per i premi su schermi piccoli */
+  .premi-container {
+    gap: 10px; /* Riduci lo spazio tra i premi */
   }
 
-  .container {
-    width: 90%; /* Rendi il contenitore più largo in proporzione allo schermo */
-    padding: 30px; /* Riduci leggermente il padding */
+  .premio {
+    width: 80px; /* Riduci la larghezza dei premi */
+    height: 80px; /* Riduci l'altezza dei premi */
   }
 
-  h1 {
-    font-size: 28px; /* Riduci la dimensione del titolo */
+  .punti-text {
+    font-size: 10px; /* Riduci la dimensione del testo dei punti */
   }
 
-  .day-button {
-    width: 60px; /* Riduci la dimensione delle sfere */
-    height: 60px;
-    font-size: 24px; /* Riduci la dimensione del testo */
-    margin: 0 10px; /* Riduci lo spazio tra le sfere */
-  }
-
-  button {
-    padding: 10px 20px; /* Riduci il padding dei pulsanti */
-    font-size: 16px;
+  .riscatta-button {
+    padding: 5px 10px; /* Riduci il padding del pulsante */
+    font-size: 12px; /* Riduci la dimensione del testo del pulsante */
   }
 }
 
 /* Stili generali del contenitore */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #4C4C4C; /* Aggiornato per abbinare il colore di sfondo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #4C4C4C; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 .container {
   background-color: #757575;
@@ -122,6 +118,7 @@ button1:hover {
     background-color: #9c27b0; /* Viola scuro */
     transform: scale(1.05); /* Ingrandisci leggermente al passaggio del mouse */
 }
+/* ... resto del CSS invariato ... */
 .premi-container {
   display: flex;
   flex-wrap: wrap;
@@ -129,51 +126,104 @@ button1:hover {
   gap: 20px;
 }
 
+/* Stile di ogni singolo premio */
 .premio {
-  width: 100px;
-  height: 100px;
-  background-color: #e0e0e0;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative; /* Per posizionare l'icona del lucchetto */
-  display: flex; /* Per centrare l'immagine e l'icona */
-  align-items: center;
-  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 15px;
+  text-align: center;
+  width: 200px; /* Larghezza di ogni premio */
+  transition: background-color 0.3s ease; /* Transizione per il colore di sfondo */
 }
 
+/* Stile del container dell'immagine */
+/* ... altri stili CSS ... */
 .premio img {
-  max-width: 100%;
-  max-height: 100%; /* Usa max-height per evitare deformazioni */
+  max-width: 150px; /* Imposta la larghezza massima */
+  max-height: 150px; /* Imposta l'altezza massima */
+  width: auto; /* Mantiene le proporzioni dell'immagine */
+  height: auto; /* Mantiene le proporzioni dell'immagine */
+}
+/* Stile del container dell'immagine */
+.img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px; /* Angoli arrotondati per il container dell'immagine */
+}
+
+/* Stile dell'immagine bloccata (non riscattabile) */
+.img-container.locked {
+  background-color: #f44336; /* Rosso */
   filter: grayscale(100%);
-  transition: filter 0.3s ease;
 }
 
-.premio.unlocked img {
-  filter: grayscale(0%);
+.img-container.locked::before {
+  content: '❌'; /* Emoji X */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: white;
 }
 
-.premio .lock-icon {
+/* Stile dell'immagine riscattabile */
+.img-container:not(.locked):not(.riscattato) {
+  background-color: #3f8c25; /* Giallo */
+}
+
+/* Stile dell'immagine riscattata */
+.img-container.riscattato {
+  background-color: #4CAF50; /* Verde */
+}
+
+.img-container.riscattato::before {
+  content: '✅'; /* Emoji spunta */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: white;
+}
+/* Stile dell'icona del lucchetto */
+.lock-icon {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 24px;
-  height: 24px;
-  fill: #555;
-  font-size: 24px; /* Imposta la dimensione dell'icona */
+  font-size: 24px;
 }
 
+/* Stile del container del testo e del pulsante */
+.info-container {
+  margin-top: 10px; /* Spazio tra l'immagine e il testo/pulsante */
+}
+
+/* Stile del testo dei punti */
 .punti-text {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-}
-#resetButton {
-  background-color: #f44336; /* Rosso */
+  font-size: 14px;
+  margin-bottom: 5px; /* Spazio tra il testo dei punti e il pulsante */
 }
 
-#resetButton:hover {
-  background-color: #d32f2f; /* Rosso più scuro */
+/* Stile del pulsante "Riscatta" */
+.riscatta-button {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.riscatta-button.riscattato {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  cursor: default; /* Rimuovi il cursore del puntatore */
+}
+/* Stile del pulsante "Riscatta" disabilitato */
+.riscatta-button:disabled {
+  background-color: #cccccc; 
+  cursor: default;
 }
