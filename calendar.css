@@ -1,3 +1,31 @@
+@media (max-width: 768px) {
+  /* Regole CSS per ingrandire gli elementi su schermi piccoli */
+  body {
+    font-size: 18px; /* Aumenta la dimensione del font base */
+  }
+
+  .container {
+    width: 90%; /* Rendi il contenitore più largo in proporzione allo schermo */
+    padding: 30px; /* Riduci leggermente il padding */
+  }
+
+  h1 {
+    font-size: 28px; /* Riduci la dimensione del titolo */
+  }
+
+  .day-button {
+    width: 60px; /* Riduci la dimensione delle sfere */
+    height: 60px;
+    font-size: 24px; /* Riduci la dimensione del testo */
+    margin: 0 10px; /* Riduci lo spazio tra le sfere */
+  }
+
+  button {
+    padding: 10px 20px; /* Riduci il padding dei pulsanti */
+    font-size: 16px;
+  }
+}
+
 /* Stili generali del contenitore */
 body {
     font-family: 'Arial', sans-serif;
@@ -74,9 +102,6 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #9d9d9d; /* Blu più scuro */
-}
 button1 {
     background-color: #5b4fc3; /* Blu */
     color: white;
