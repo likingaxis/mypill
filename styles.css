@@ -1,0 +1,73 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #4C4C4C; /* Aggiornato per abbinare il colore di sfondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: #757575; /* Aggiornato per abbinare il colore del pannello */
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Ombra più definita */
+    width: 340px;
+    text-align: center;
+}
+
+.login-container h1 {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+input[type="text"] {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 25px;
+    border: none; /* Nessun bordo per gli input */
+    font-size: 16px;
+    border-radius: 33px 33px 0px 0px;
+}
+input[type="password"] {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 25px;
+    border: none; /* Nessun bordo per gli input */
+    font-size: 16px;
+    border-radius: 0px 0px 33px 33px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    width: 100%; /* Bottoni a tutta larghezza */
+    font-size: 18px;
+    letter-spacing: 1px; /* Spaziatura tra le lettere */
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transizione morbida per hover */
+}
+
+#login-btn {
+    background-color: #90ee90; /* Colore verde più chiaro per il bottone accedi */
+}
+
+#create-account-btn {
+    background-color: #dda0dd; /* Colore viola per il bottone crea un account */
+}
+
+button:hover {
+    opacity: 0.9; /* Leggera trasparenza al passaggio del mouse */
+}
+.login-container button#reset-localstorage-btn {
+    margin-top: 20px; /* Aggiungi un margine superiore */
+    background-color: #dc3545; /* Colore di sfondo rosso */
+  }
+  
+  .login-container button#reset-localstorage-btn:hover {
+    background-color: #c82333; /* Colore di sfondo rosso più scuro al passaggio del mouse */
+  }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tracker Giornaliero</title>
+  <link rel="stylesheet" href="calendar.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+  <div id="calendario" class="container">
+    <h1>Giornata</h1>
+    <div class="swiper">
+      <div class="swiper-wrapper days-container"></div>
+    </div>
+    <div class="button-container">
+        <button1 id="premiButton">🎁</button1>
+        <button id="presaButton">Presa</button>
+        <button id="resetButton">Reset</button>
+      </div>
+  </div>
+
+  <div id="premi" class="container" style="display: none;">
+    <h1>Premi <span id="punti-counter">0</span></h1>
+    <div class="premi-container"></div>
+    <button id="tornaButton">Torna al Calendario</button>
+  </div>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="calendar.js"></script>
+</body>
+</html>

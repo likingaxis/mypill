@@ -1,0 +1,154 @@
+/* Stili generali del contenitore */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #4C4C4C; /* Aggiornato per abbinare il colore di sfondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.container {
+  background-color: #757575;
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Ombra più definita */
+  width: 340px;
+  text-align: center;
+}
+
+/* Stile del titolo */
+h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #e3e3e3; /* Testo più scuro */
+}
+
+/* Contenitore dei giorni */
+.days-container {
+  display: flex;
+}
+
+/* Stile dei pulsanti dei giorni */
+.day-button {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #c56fb8; /* Grigio più chiaro */
+  color: #000000;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transizione per colore e trasformazione */
+}
+
+.day-button:hover {
+  background-color: #d0d0d0;
+  transform: scale(1.05); /* Ingrandisci leggermente al passaggio del mouse */
+}
+
+.day-button.taken {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.day-button.active { /* Nuovo stile per il giorno attivo */
+  background-color: #4CAF50; /* Blu */
+  color: white;
+}
+
+/* Stile dei pulsanti "Presa" e "Reset" */
+button {
+  background-color: #4faa6d; /* Blu */
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 20px 10px 0;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #9d9d9d; /* Blu più scuro */
+}
+button1 {
+    background-color: #5b4fc3; /* Blu */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 20px 10px 0;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+button1:hover {
+    background-color: #9d9d9d; /* Grigio più scuro */
+}
+
+.day-button:hover {
+    background-color: #9c27b0; /* Viola scuro */
+    transform: scale(1.05); /* Ingrandisci leggermente al passaggio del mouse */
+}
+.premi-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.premio {
+  width: 100px;
+  height: 100px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative; /* Per posizionare l'icona del lucchetto */
+  display: flex; /* Per centrare l'immagine e l'icona */
+  align-items: center;
+  justify-content: center;
+}
+
+.premio img {
+  max-width: 100%;
+  max-height: 100%; /* Usa max-height per evitare deformazioni */
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.premio.unlocked img {
+  filter: grayscale(0%);
+}
+
+.premio .lock-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  fill: #555;
+  font-size: 24px; /* Imposta la dimensione dell'icona */
+}
+
+.punti-text {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+#resetButton {
+  background-color: #f44336; /* Rosso */
+}
+
+#resetButton:hover {
+  background-color: #d32f2f; /* Rosso più scuro */
+}
