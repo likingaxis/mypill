@@ -117,8 +117,8 @@ button1:hover {
 /* Stile del container dell'immagine */
 /* ... altri stili CSS ... */
 .premio img {
-  max-width: 150px; /* Imposta la larghezza massima */
-  max-height: 150px; /* Imposta l'altezza massima */
+  max-width: 100px; /* Imposta la larghezza massima */
+  max-height: 100px; /* Imposta l'altezza massima */
   width: auto; /* Mantiene le proporzioni dell'immagine */
   height: auto; /* Mantiene le proporzioni dell'immagine */
 }
