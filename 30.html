@@ -53,11 +53,11 @@
 <body>
     <canvas id="gameCanvas" width="320" height="480"></canvas>
     <div class="menu" id="menu">
-        <h1>Flappy Bird</h1>
+        <h1>Arriva a 10 punti</h1>
         <button onclick="startGame()">Start Game</button>
     </div>
     <div class="message" id="message">
-        <p>Congratulazioni! Hai superato il 20esimo ostacolo!</p>
+        <p>Congratulazioni! premio:puoi chiedere a Luca un suggerimento per il regalo di compleanno</p>
         <button onclick="startGame()">Riprova</button>
     </div>
     <script>
@@ -140,7 +140,7 @@
             ctx.font = "16px Arial";
             ctx.fillText("Score: " + score, 10, 20);
 
-            if (score >= 20) {
+            if (score >= 10) {
                 endGame(true);
             }
 
@@ -158,7 +158,7 @@
         function endGame(won = false) {
             clearInterval(gameInterval);
             if (won) {
-                messageElement.innerHTML = "<p>Congratulazioni! Hai superato il 20esimo ostacolo!</p><button onclick='startGame()'>Riprova</button>";
+                messageElement.innerHTML = "<p>Congratulazioni! premio:puoi chiedere a Luca un suggerimento per il regalo di compleanno</p><button onclick='startGame()'>Riprova</button>";
             } else {
                 messageElement.innerHTML = "<p>Hai perso! Prova di nuovo.</p><button onclick='startGame()'>Riprova</button>";
             }
