@@ -172,8 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
             button.disabled = giorniPresi < premio.puntiRichiesti;
             button.addEventListener('click', () => {
               if (giorniPresi >= premio.puntiRichiesti) {
-                takenDays = takenDays.map((day) => day && Math.random() < 0.8);
-                localStorage.setItem('takenDays', JSON.stringify(takenDays));
+                // NON DETRARRE PUNTI
+                // takenDays = takenDays.map((day) => day && Math.random() < 0.8); 
+        
+                localStorage.setItem('takenDays', JSON.stringify(takenDays)); // Salva comunque lo stato dei giorni
                 premiRiscattati[premio.nome] = true;
                 localStorage.setItem('premiRiscattati', JSON.stringify(premiRiscattati));
                 sbloccaPremi(); // Aggiorna i premi dopo il riscatto
