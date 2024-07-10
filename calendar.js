@@ -112,9 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const puntiCounter = document.getElementById('punti-counter');
       
         const premi = [
-          { nome: "Premio 1", immagine: "premio1.jpg", puntiRichiesti: 10, paginaHtml: "10.html" },
-          { nome: "Premio 2", immagine: "premio2.jpg", puntiRichiesti: 20, paginaHtml: "20.html" },
-          { nome: "Premio 3", immagine: "premio3.jpg", puntiRichiesti: 30, paginaHtml: "30.html" },
+          { nome: "Premio 1", immagine: "premio1.jpg", puntiRichiesti: 10, paginaHtml: "https://likingaxis.github.io/mypill/10.html" },
+          { nome: "Premio 2", immagine: "premio2.jpg", puntiRichiesti: 20, paginaHtml: "https://likingaxis.github.io/mypill/20.html" },
+          { nome: "Premio 3", immagine: "premio3.jpg", puntiRichiesti: 30, paginaHtml: "https://likingaxis.github.io/mypill/30.html" },
           // ... aggiungi altri premi qui
         ];
       
