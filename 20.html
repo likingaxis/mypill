@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird Game</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to top, #70c5ce, #b4e7f8); /* Gradient sky effect */
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 2px solid #000;
+        }
+        .menu, .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 300px;
+        }
+        .message {
+            display: none;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #ffd700;
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #ffc700;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="320" height="480"></canvas>
+    <div class="menu" id="menu">
+        <h1>Arriva a 6 punti</h1>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+    <div class="message" id="message">
+        <p>Congratulazioni! premio:il codice è 1456</p>
+        <button onclick="startGame()">Riprova</button>
+    </div>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const bird = {
+            x: 50,
+            y: 150,
+            width: 20,
+            height: 20,
+            gravity: 1.5,
+            lift: -15,
+            velocity: 0,
+            draw() {
+                ctx.fillStyle = "#ff0000"; // Red bird
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        };
+
+        const pipeWidth = 30;
+        const pipeGap = 200;
+        const pipeColor = "#7851a9"; // Purple pipes
+        const pipes = [];
+        const pipeFrequency = 120;
+        let frame = 0;
+        let score = 0;
+        let gameInterval;
+        const messageElement = document.getElementById("message");
+
+        function startGame() {
+            document.getElementById("menu").style.display = "none";
+            messageElement.style.display = "none";
+            resetGame();
+            gameInterval = setInterval(draw, 20);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            bird.velocity += bird.gravity;
+            bird.y += bird.velocity;
+
+            if (frame % pipeFrequency === 0) {
+                const pipeHeight = Math.floor(Math.random() * (canvas.height - pipeGap));
+                pipes.push({
+                    x: canvas.width,
+                    y: pipeHeight
+                });
+            }
+
+            pipes.forEach((pipe, index) => {
+                pipe.x -= 2;
+
+                ctx.fillStyle = pipeColor;
+                ctx.fillRect(pipe.x, 0, pipeWidth, pipe.y);
+                ctx.fillRect(pipe.x, pipe.y + pipeGap, pipeWidth, canvas.height - pipe.y - pipeGap);
+
+                if (pipe.x + pipeWidth < 0) {
+                    pipes.splice(index, 1);
+                    score++;
+                }
+
+                if (
+                    bird.x < pipe.x + pipeWidth &&
+                    bird.x + bird.width > pipe.x &&
+                    (bird.y < pipe.y || bird.y + bird.height > pipe.y + pipeGap)
+                ) {
+                    endGame();
+                }
+            });
+
+            bird.draw();
+
+            if (bird.y + bird.height > canvas.height || bird.y < 0) {
+                endGame();
+            }
+
+            ctx.fillStyle = "#000";
+            ctx.font = "16px Arial";
+            ctx.fillText("Score: " + score, 10, 20);
+
+            if (score >= 6) {
+                endGame(true);
+            }
+
+            frame++;
+        }
+
+        function resetGame() {
+            bird.y = 150;
+            bird.velocity = 0;
+            pipes.length = 0;
+            frame = 0;
+            score = 0;
+        }
+
+        function endGame(won = false) {
+            clearInterval(gameInterval);
+            if (won) {
+                messageElement.innerHTML = "<p>Congratulazioni! premio:il codice è 1456</p><button onclick='startGame()'>Riprova</button>";
+            } else {
+                messageElement.innerHTML = "<p>Hai perso! Prova di nuovo.</p><button onclick='startGame()'>Riprova</button>";
+            }
+            messageElement.style.display = "block";
+        }
+
+        canvas.addEventListener("click", () => {
+            bird.velocity = bird.lift;
+        });
+    </script>
+</body>
+</html>
